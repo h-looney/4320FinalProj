@@ -4,7 +4,6 @@ from inspect import signature
 
 class DataFile:
 
-    __data = []
     __param_count = 0
 
     def __set_param_count(self):
@@ -14,6 +13,7 @@ class DataFile:
         return self.__obj(*d[:self.__param_count])
 
     def __init__(self, filename, delimiter=', ', obj=None):
+        self.__data = []
         self.__filename = filename
         self.__obj = obj
         if obj:
