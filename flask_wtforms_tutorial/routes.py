@@ -1,6 +1,7 @@
 from flask import current_app as app
 from flask import redirect, render_template, url_for, request, flash
 
+from .AdminUser import AdminUser
 from .forms import *
 
 
@@ -21,8 +22,15 @@ def user_options():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
-
     form = AdminLoginForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        username = request.form['username']
+        password = request.form['password']
+        login = AdminUser(username, password)
+        if login.is_registered():
+            return redirect('/admin/datashowcase')
+        else:
+            print("not certified")
 
     return render_template("admin.html", form=form, template="form-template")
 
@@ -33,3 +41,8 @@ def reservations():
 
     return render_template("reservations.html", form=form, template="form-template")
 
+@app.route("/admin/datashowcase", methods=['GET', 'POST'])
+def datashowcase():
+    form = AdminDataShowcase()
+
+    return render_template("data_display.html", form=form, template="form-template")
