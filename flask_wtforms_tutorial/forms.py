@@ -11,8 +11,7 @@ from wtforms.validators import DataRequired
 from .DataRetreival import calculate_total_sales
 
 class UserOptionForm(FlaskForm):
-    """Generate Your Graph."""
-    
+    """Generate Your Graph."""    
     #THIS IS WHERE YOU WILL IMPLEMENT CODE TO POPULATE THE SYMBOL FIELD WITH STOCK OPTIONS
     option = SelectField("Choose an Option",[DataRequired()],
         choices=[
