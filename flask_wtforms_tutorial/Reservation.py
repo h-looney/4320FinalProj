@@ -20,8 +20,21 @@ class Reservation:
         self.column = int(column)
 
     def __gen_e_ticket_num(self):
-        # TODO
-        self.e_ticket_num = 'placeholder'
+        t = "INFOTC4320"
+        y = 0 
+        x = 0
+        result = ""
+        while x < len(self.name) and y < len(t):
+            result += self.name[x] + t[y]
+            x+=1
+            y+=1
+        while x < len(self.name):
+            result += s[x]
+            x += 1
+        while y < len(t):
+            result += t[y]
+            y += 1
+        self.e_ticket_num = result
 
     def __is_available(self, data_file):
         reserved = [(r.row, r.column) for r in data_file.read()]
