@@ -8,7 +8,6 @@ from wtforms import (
 #from datetime import date
 #from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired
-from .DataRetreival import calculate_total_sales
 
 class UserOptionForm(FlaskForm):
     """Generate Your Graph."""    
@@ -66,11 +65,4 @@ class AdminLoginForm(FlaskForm):
     username = StringField('Username', [DataRequired()])
     password = StringField('Password', [DataRequired()])
     login = SubmitField("Login")
-
-
-class AdminDataShowcase(FlaskForm):
-    username = StringField('Username', [DataRequired()])
-    data = calculate_total_sales()
-    pass
-
 

@@ -1,3 +1,4 @@
+from functools import reduce
 from .DataFile import DataFile
 
 
@@ -53,6 +54,17 @@ class Reservation:
     def get_all():
         data_file = DataFile(Reservation.__data_filename, obj=Reservation)
         return [[r.row, r.column] for r in data_file.read()]
+
+    @staticmethod
+    def get_cost_matrix():
+        cost_matrix = [[100, 75, 50, 100] for _ in range(12)]
+        return cost_matrix
+
+    @staticmethod
+    def get_total_sales():
+        reserved = Reservation.get_all()
+        cost_matrix = Reservation.get_cost_matrix()
+        return reduce(lambda cost, r: cost + cost_matrix[r[0]][r[1]], reserved, 0)
 
     def __repr__(self):
         return f'{self.name}, {self.row}, {self.column}, {self.e_ticket_num}'

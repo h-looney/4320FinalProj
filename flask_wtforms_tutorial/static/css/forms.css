@@ -129,6 +129,10 @@ input[type="submit"]:hover {
   margin: auto;
 }
 
+p.error {
+  color: red;
+}
+
 i {
   position: absolute;
   margin: auto;

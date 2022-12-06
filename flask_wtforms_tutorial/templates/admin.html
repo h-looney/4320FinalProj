@@ -6,12 +6,20 @@
 
 {% block content %}
 <div class="formwrapper">
-  <h2 class="title">Administrator Login</h2>
   <div style="text-align: right">
     <a href="http://0.0.0.0:5002/">Home</a>
     | <a href="http://0.0.0.0:5002/admin">Admin</a>
     | <a href="http://0.0.0.0:5002/reservations">Reservations</a>
   </div>
+  <h2 class="title">Administrator Login</h2>
+    {% if errors %}
+      {% for error in errors %}
+        <p class="error">{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+    {% if total_sales != False %}
+      <p>Total Sales: ${{ total_sales }}</p>
+    {% endif %}
     <form method="POST" action="/admin">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.username.label }} {{ form.username }}

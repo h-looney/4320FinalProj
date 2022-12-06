@@ -2,6 +2,7 @@ from flask import current_app as app
 from flask import redirect, render_template, url_for, request, flash
 
 from .AdminUser import AdminUser
+from .Reservation import Reservation
 from .forms import *
 
 
@@ -23,16 +24,19 @@ def user_options():
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
     form = AdminLoginForm()
+
+    errors = []
+    total_sales = False
     if request.method == 'POST' and form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
         login = AdminUser(username, password)
         if login.is_registered():
-            return redirect('/admin/datashowcase')
+            total_sales = Reservation.get_total_sales()
         else:
-            print("not certified")
+            errors.append('Bad username/password combination. Try again.')
 
-    return render_template("admin.html", form=form, template="form-template")
+    return render_template("admin.html", form=form, template="form-template", errors=errors, total_sales=total_sales)
 
 @app.route("/reservations", methods=['GET', 'POST'])
 def reservations():
@@ -41,8 +45,3 @@ def reservations():
 
     return render_template("reservations.html", form=form, template="form-template")
 
-@app.route("/admin/datashowcase", methods=['GET', 'POST'])
-def datashowcase():
-    form = AdminDataShowcase()
-
-    return render_template("data_display.html", form=form, template="form-template")
