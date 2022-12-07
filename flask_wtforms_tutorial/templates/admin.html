@@ -17,6 +17,13 @@
         <p class="error">{{ error }}</p>
       {% endfor %}
     {% endif %}
+    {% if seating_chart %}
+      <div style="background-color: lightgray; padding: 20px; width: fit-content; border-radius: 10px; text-align: center;">
+        {% for r in seating_chart %}
+          <p style="margin: 0;">{{ r }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
     {% if total_sales != False %}
       <p>Total Sales: ${{ total_sales }}</p>
     {% endif %}
