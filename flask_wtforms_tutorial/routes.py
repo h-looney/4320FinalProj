@@ -28,8 +28,17 @@ def admin():
 
 @app.route("/reservations", methods=['GET', 'POST'])
 def reservations():
-
+    
     form = ReservationForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        _firstname = request.form['first_name']
+        _lastname = request.form['last_name']
+        _name = _firstname + ' ' + _lastname
+        _row = request.form['row']
+        _seat = request.form['seat']
+        reservation = Reservation(_name, _row, _seat)
+        reservation.save()
 
     return render_template("reservations.html", form=form, template="form-template")
 
