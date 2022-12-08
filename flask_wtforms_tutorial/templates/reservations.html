@@ -12,7 +12,23 @@
     | <a href="http://0.0.0.0:5002/reservations">Reservations</a>
   </div>
   <h2 class="title">Reserve Your Seat</h2>
-  
+  {% if errors %}
+      {% for error in errors %}
+        <p class="error">{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+    {% if success %}
+        {{ success }}
+    {% endif %}
+    {% if seating_chart %}
+      <h3>Seating Chart</h3>
+      <p>X = Reserved Seat ; O = Available Seat</p>
+      <div class="seating-chart">
+        {% for r in seating_chart %}
+          <p>{{ r }}</p>
+        {% endfor %}
+      </div>
+  {% endif %}
   <form method="POST" action="/reservations">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.first_name.label }} {{ form.first_name }}
