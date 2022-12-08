@@ -12,7 +12,6 @@ class DataFile:
     def __assign_to_obj(self, d):
         return self.__obj(*d[:self.__param_count])
     
-    filename = 'reservations.txt'
     def __init__(self, filename, delimiter=', ', obj=None):
         self.__data = []
         self.__filename = filename

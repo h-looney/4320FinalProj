@@ -22,15 +22,16 @@ class Reservation:
 
     def __gen_e_ticket_num(self):
         t = "INFOTC4320"
+        name = self.name.replace(' ', '')
         y = 0 
         x = 0
         result = ""
-        while x < len(self.name) and y < len(t):
-            result += self.name[x] + t[y]
+        while x < len(name) and y < len(t):
+            result += name[x] + t[y]
             x+=1
             y+=1
-        while x < len(self.name):
-            result += self.name[x]
+        while x < len(name):
+            result += name[x]
             x += 1
         while y < len(t):
             result += t[y]
@@ -65,6 +66,14 @@ class Reservation:
         reserved = Reservation.get_all()
         cost_matrix = Reservation.get_cost_matrix()
         return reduce(lambda cost, r: cost + cost_matrix[r[0]][r[1]], reserved, 0)
+
+    @staticmethod
+    def get_seating_chart():
+        reserved = Reservation.get_all()
+        chart = [['O', 'O', 'O', 'O'] for _ in range(12)]
+        for r in reserved:
+            chart[r[0]][r[1]] = "X"
+        return chart
 
     def __repr__(self):
         return f'{self.name}, {self.row}, {self.column}, {self.e_ticket_num}'

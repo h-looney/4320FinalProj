@@ -146,3 +146,15 @@ i {
 .g-recaptcha div {
   margin: auto;
 }
+
+.seating-chart {
+  display: inline-block;
+  background-color: lightgray;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.seating-chart p {
+  margin: 0;
+}

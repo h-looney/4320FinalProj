@@ -33,10 +33,7 @@ def admin():
         login = AdminUser(username, password)
         if login.is_registered():
             total_sales = Reservation.get_total_sales()
-            reservations = Reservation.get_all()
-            seating_chart = [['O', 'O', 'O', 'O'] for _ in range(12)]
-            for r in reservations:
-                seating_chart[r[0]][r[1]] = "X"
+            seating_chart = Reservation.get_seating_chart()
         else:
             errors.append('Bad username/password combination. Try again.')
 

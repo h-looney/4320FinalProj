@@ -18,9 +18,11 @@
       {% endfor %}
     {% endif %}
     {% if seating_chart %}
-      <div style="background-color: lightgray; padding: 20px; width: fit-content; border-radius: 10px; text-align: center;">
+      <h3>Seating Chart</h3>
+      <p>X = Reserved Seat ; O = Available Seat</p>
+      <div class="seating-chart">
         {% for r in seating_chart %}
-          <p style="margin: 0;">{{ r }}</p>
+          <p>{{ r }}</p>
         {% endfor %}
       </div>
     {% endif %}
