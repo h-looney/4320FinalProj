@@ -10,8 +10,7 @@ from wtforms import (
 from wtforms.validators import DataRequired
 
 class UserOptionForm(FlaskForm):
-    """Generate Your Graph."""
-    
+    """Generate Your Graph."""    
     #THIS IS WHERE YOU WILL IMPLEMENT CODE TO POPULATE THE SYMBOL FIELD WITH STOCK OPTIONS
     option = SelectField("Choose an Option",[DataRequired()],
         choices=[
@@ -66,6 +65,4 @@ class AdminLoginForm(FlaskForm):
     username = StringField('Username', [DataRequired()])
     password = StringField('Password', [DataRequired()])
     login = SubmitField("Login")
-
-
 

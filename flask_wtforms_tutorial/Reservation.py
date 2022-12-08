@@ -1,3 +1,4 @@
+from functools import reduce
 from .DataFile import DataFile
 
 
@@ -20,8 +21,21 @@ class Reservation:
         self.column = int(column)
 
     def __gen_e_ticket_num(self):
-        # TODO
-        self.e_ticket_num = 'placeholder'
+        t = "INFOTC4320"
+        y = 0 
+        x = 0
+        result = ""
+        while x < len(self.name) and y < len(t):
+            result += self.name[x] + t[y]
+            x+=1
+            y+=1
+        while x < len(self.name):
+            result += s[x]
+            x += 1
+        while y < len(t):
+            result += t[y]
+            y += 1
+        self.e_ticket_num = result
 
     def __is_available(self, data_file):
         reserved = [(r.row, r.column) for r in data_file.read()]
@@ -40,6 +54,17 @@ class Reservation:
     def get_all():
         data_file = DataFile(Reservation.__data_filename, obj=Reservation)
         return [[r.row, r.column] for r in data_file.read()]
+
+    @staticmethod
+    def get_cost_matrix():
+        cost_matrix = [[100, 75, 50, 100] for _ in range(12)]
+        return cost_matrix
+
+    @staticmethod
+    def get_total_sales():
+        reserved = Reservation.get_all()
+        cost_matrix = Reservation.get_cost_matrix()
+        return reduce(lambda cost, r: cost + cost_matrix[r[0]][r[1]], reserved, 0)
 
     def __repr__(self):
         return f'{self.name}, {self.row}, {self.column}, {self.e_ticket_num}'
