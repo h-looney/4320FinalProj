@@ -30,7 +30,7 @@ class Reservation:
             x+=1
             y+=1
         while x < len(self.name):
-            result += s[x]
+            result += self.name[x]
             x += 1
         while y < len(t):
             result += t[y]
