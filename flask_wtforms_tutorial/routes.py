@@ -45,7 +45,6 @@ def reservations():
     form = ReservationForm()
     errors = []
     success = []
-    seating_chart = []
     if request.method == 'POST' and form.validate_on_submit():
         _firstname = request.form['first_name']
         _lastname = request.form['last_name']
@@ -55,10 +54,10 @@ def reservations():
         reservation = Reservation(_name, _row, _seat)
         if reservation.save():
             success = f'Your reservation was succesful. Your ticket number is {reservation.e_ticket_num}.'
-            seating_chart = Reservation.get_seating_chart()
+            
         else:
             errors.append('Reservation already exists for that seat. Please try another location.')
-    
+    seating_chart = Reservation.get_seating_chart()
 
     return render_template("reservations.html", form=form, template="form-template", errors=errors, success=success, seating_chart=seating_chart)
 
